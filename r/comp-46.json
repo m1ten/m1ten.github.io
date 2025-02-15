@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "comp-46",
+  "type": "registry:component",
+  "dependencies": [
+    "react-phone-number-input",
+    "react-phone-number-input/flags"
+  ],
+  "registryDependencies": [
+    "https://originui.com/r/input.json",
+    "https://originui.com/r/label.json"
+  ],
+  "files": [
+    {
+      "path": "registry/default/components/comp-46.tsx",
+      "content": "\"use client\";\n\nimport { cn } from \"@/registry/default/lib/utils\";\nimport { Input } from \"@/registry/default/ui/input\";\nimport { Label } from \"@/registry/default/ui/label\";\nimport { ChevronDown, Phone } from \"lucide-react\";\nimport React, { forwardRef, useId, useState } from \"react\";\nimport * as RPNInput from \"react-phone-number-input\";\nimport flags from \"react-phone-number-input/flags\";\n\nexport default function Component() {\n  const id = useId();\n  const [value, setValue] = useState(\"\");\n\n  return (\n    \u003Cdiv className=\"space-y-2\" dir=\"ltr\"\u003E\n      \u003CLabel htmlFor={id}\u003EPhone number input\u003C/Label\u003E\n      \u003CRPNInput.default\n        className=\"flex rounded-lg shadow-sm shadow-black/5\"\n        international\n        flagComponent={FlagComponent}\n        countrySelectComponent={CountrySelect}\n        inputComponent={PhoneInput}\n        id={id}\n        placeholder=\"Enter phone number\"\n        value={value}\n        onChange={(newValue) =\u003E setValue(newValue ?? \"\")}\n      /\u003E\n      \u003Cp className=\"mt-2 text-xs text-muted-foreground\" role=\"region\" aria-live=\"polite\"\u003E\n        Built with{\" \"}\n        \u003Ca\n          className=\"underline hover:text-foreground\"\n          href=\"https://gitlab.com/catamphetamine/react-phone-number-input\"\n          target=\"_blank\"\n          rel=\"noopener nofollow\"\n        \u003E\n          react-phone-number-input\n        \u003C/a\u003E\n      \u003C/p\u003E\n    \u003C/div\u003E\n  );\n}\n\nconst PhoneInput = forwardRef\u003CHTMLInputElement, React.ComponentProps\u003C\"input\"\u003E\u003E(\n  ({ className, ...props }, ref) =\u003E {\n    return (\n      \u003CInput\n        className={cn(\"-ms-px rounded-s-none shadow-none focus-visible:z-10\", className)}\n        ref={ref}\n        {...props}\n      /\u003E\n    );\n  },\n);\n\nPhoneInput.displayName = \"PhoneInput\";\n\ntype CountrySelectProps = {\n  disabled?: boolean;\n  value: RPNInput.Country;\n  onChange: (value: RPNInput.Country) =\u003E void;\n  options: { label: string; value: RPNInput.Country | undefined }[];\n};\n\nconst CountrySelect = ({ disabled, value, onChange, options }: CountrySelectProps) =\u003E {\n  const handleSelect = (event: React.ChangeEvent\u003CHTMLSelectElement\u003E) =\u003E {\n    onChange(event.target.value as RPNInput.Country);\n  };\n\n  return (\n    \u003Cdiv className=\"relative inline-flex items-center self-stretch rounded-s-lg border border-input bg-background py-2 pe-2 ps-3 text-muted-foreground transition-shadow focus-within:z-10 focus-within:border-ring focus-within:outline-none focus-within:ring-[3px] focus-within:ring-ring/20 hover:bg-accent hover:text-foreground has-[:disabled]:pointer-events-none has-[:disabled]:opacity-50\"\u003E\n      \u003Cdiv className=\"inline-flex items-center gap-1\" aria-hidden=\"true\"\u003E\n        \u003CFlagComponent country={value} countryName={value} aria-hidden=\"true\" /\u003E\n        \u003Cspan className=\"text-muted-foreground/80\"\u003E\n          \u003CChevronDown size={16} strokeWidth={2} aria-hidden=\"true\" /\u003E\n        \u003C/span\u003E\n      \u003C/div\u003E\n      \u003Cselect\n        disabled={disabled}\n        value={value}\n        onChange={handleSelect}\n        className=\"absolute inset-0 text-sm opacity-0\"\n        aria-label=\"Select country\"\n      \u003E\n        \u003Coption key=\"default\" value=\"\"\u003E\n          Select a country\n        \u003C/option\u003E\n        {options\n          .filter((x) =\u003E x.value)\n          .map((option, i) =\u003E (\n            \u003Coption key={option.value ?? `empty-${i}`} value={option.value}\u003E\n              {option.label} {option.value && `+${RPNInput.getCountryCallingCode(option.value)}`}\n            \u003C/option\u003E\n          ))}\n      \u003C/select\u003E\n    \u003C/div\u003E\n  );\n};\n\nconst FlagComponent = ({ country, countryName }: RPNInput.FlagProps) =\u003E {\n  const Flag = flags[country];\n\n  return (\n    \u003Cspan className=\"w-5 overflow-hidden rounded-sm\"\u003E\n      {Flag ? \u003CFlag title={countryName} /\u003E : \u003CPhone size={16} aria-hidden=\"true\" /\u003E}\n    \u003C/span\u003E\n  );\n};\n",
+      "type": "registry:component"
+    }
+  ],
+  "meta": {
+    "tags": [
+      "input",
+      "label",
+      "phone"
+    ]
+  }
+}
