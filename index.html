@@ -1,26 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>miten</title>
-    <style>
-        body {
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        p {
-            color: #333;
-            font-size: 20px;
-        }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>miten</title>
+  <meta name="theme-color" content="#000000" />
+
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌘</text></svg>" />
 </head>
 <body>
-    <p>Hi, I will update this soon. In the meantime, check out <a href="https://github.com/m1ten/">https://github.com/m1ten/</a></p>
+  <canvas id="starfield"></canvas>
+
+  <main class="site">
+    <header class="header">
+      <div class="bio">
+        <h1>miten</h1>
+        <p>software developer, homelab enthusiast, and property manager.</p>
+      </div>
+      <nav class="links">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">light</button>
+        <a href="mailto:hello@miten.net">email</a>
+        <a href="https://github.com/m1ten" target="_blank" rel="noopener noreferrer">github</a>
+      </nav>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Projects</h2>
+      
+      <div class="project-list">
+        <article class="item">
+          <div class="item-header">
+            <h3 class="item-title">Hous</h3>
+            <span class="item-meta">Bun &bull; SQLite &bull; TypeScript</span>
+          </div>
+          <p class="item-desc">
+            Local-first property management system for multi-unit properties. Runs offline-first with embedded SQLite, keeping tenant ledgers and maintenance tracking self-contained with zero monthly SaaS fees.
+          </p>
+        </article>
+
+        <article class="item">
+          <div class="item-header">
+            <h3 class="item-title">Homelab &amp; Infrastructure</h3>
+            <span class="item-meta">Proxmox &bull; ZFS &bull; OPNsense</span>
+          </div>
+          <p class="item-desc">
+            Dual-node Proxmox VE cluster with mirrored ZFS storage and automated PBS backups synced offsite to Backblaze B2. Hosts daily services including Immich, Navidrome, Forgejo, Vaultwarden, and Home Assistant.
+          </p>
+        </article>
+
+        <article class="item">
+          <div class="item-header">
+            <h3 class="item-title">Hardware &amp; Telecom</h3>
+            <span class="item-meta">FreePBX &bull; Telnyx &bull; ESP32</span>
+          </div>
+          <p class="item-desc">
+            Asterisk/FreePBX VoIP setup with Telnyx elastic SIP trunks and ATA bridging for physical phones. Also reverse engineering 90s electromechanical vending machine logic boards and MDB serial protocols using ESP32.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>miten.net &bull; <span id="year">2026</span></span>
+      <a href="https://github.com/m1ten.keys" target="_blank" rel="noopener noreferrer" class="sig-badge" title="View SSH public key on GitHub">
+        <span class="sig-dot"></span>
+        <span class="sig-text">ssh-ed25519 AAAAC3...DIubG</span>
+      </a>
+    </footer>
+  </main>
+
+  <script src="main.js"></script>
 </body>
 </html>
